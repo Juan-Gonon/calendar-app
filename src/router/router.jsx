@@ -1,0 +1,20 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { LoginPage } from "../auth";
+import { CalendarPage } from "../calendar";
+
+
+export function AppRouter() {
+    const authStatus = 'not-authenticated'
+  return (
+    <BrowserRouter>
+       <Routes>
+        {
+            (authStatus === 'not-authenticated')
+            ? <Route path="/auth/*" element={<LoginPage />} />
+            : <Route path="/*" element={<CalendarPage />} />
+        }
+        <Route path="/*" element={<Navigate to='/auth/login' />} />
+       </Routes>
+    </BrowserRouter>
+  )
+}
