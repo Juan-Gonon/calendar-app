@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { localizer, getMessagesES } from '../../helpers';
 import { useState } from 'react';
 import { CalendarModal } from '../components/CalendarModal';
+import { useUiStore } from '../../hooks';
 
 
 const events = [{
@@ -21,6 +22,7 @@ const events = [{
 
 export function CalendarPage() {
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
+  const { openDateModal } = useUiStore()
 
   const eventStyleGetter = (e, start, end, isSelected) => {
     // console.log({
@@ -41,6 +43,7 @@ export function CalendarPage() {
 
   const onDoubleClick = (e) => {
     // console.log({ doubleClick: e })
+    openDateModal()
   }
   const onSelect = (e) => {
     // console.log({ click: e })
