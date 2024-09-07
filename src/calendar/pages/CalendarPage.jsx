@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { CalendarModal } from '../components/CalendarModal';
 import { useUiStore } from '../../hooks';
 import { useCalendarStore } from '../../hooks';
+import { FabAddNew } from '../components/FabAddNew';
 
 
 export function CalendarPage() {
@@ -61,6 +62,7 @@ export function CalendarPage() {
         defaultView={lastView}
       />
       <CalendarModal />
+      <FabAddNew />
     </>
   )
 }
