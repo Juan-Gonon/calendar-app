@@ -21,11 +21,11 @@ export const calendarSlice = createSlice({
         activeEvent: null,
     },
     reducers: {
-        increment: (state /* action */) => {
-            state.counter += 1;
-        },
+        onSetActiveEvent: (state, { payload }) => {
+            state.activeEvent = payload
+        }
     },
 });
 
 // Los creadores de acciones se generan para cada función reductora de casos
-export const { increment } = calendarSlice.actions;
+export const { onSetActiveEvent } = calendarSlice.actions;
