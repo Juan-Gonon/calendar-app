@@ -14,7 +14,7 @@ export function CalendarPage() {
   const { openDateModal } = useUiStore()
   const { events, setActiveEvent } = useCalendarStore()
 
-  const eventStyleGetter = (e, start, end, isSelected) => {
+  const eventStyleGetter = (/*e, start, end, isSelected*/) => {
     // console.log({
     //   e, start, end, isSelected
     // })
@@ -31,7 +31,7 @@ export function CalendarPage() {
     }
   }
 
-  const onDoubleClick = (e) => {
+  const onDoubleClick = () => {
     // console.log({ doubleClick: e })
     openDateModal()
   }
