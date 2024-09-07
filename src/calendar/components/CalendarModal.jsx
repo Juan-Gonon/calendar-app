@@ -1,4 +1,4 @@
-import { differenceInSeconds } from "date-fns";
+import { addHours, differenceInSeconds } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import Modal from "react-modal";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -23,10 +23,10 @@ Modal.setAppElement("#root");
 
 export function CalendarModal() {
     const [formValues, setFormValues] = useState({
-        // title: "Juan",
-        // notes: "Gonon",
-        // start: new Date(),
-        // end: addHours(new Date(), 2),
+        title: "",
+        notes: "",
+        start: new Date(),
+        end: addHours(new Date(), 2),
     });
     const [formSubmitted, setFormSubmitted] = useState(false)
     const { isDateModalOpen, closeDateModal } = useUiStore()
