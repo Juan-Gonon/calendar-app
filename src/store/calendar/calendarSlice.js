@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { addHours } from "date-fns";
 
 const tempEvent = {
+    _id: new Date().getTime(),
     title: "Cumpleaños de kamila",
     notes: "Hay que comprar el pastel",
     start: new Date(),
