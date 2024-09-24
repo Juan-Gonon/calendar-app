@@ -4,7 +4,7 @@ import { CalendarPage } from "../calendar";
 
 
 export function AppRouter() {
-    const authStatus = 'authenticated' // not-authenticated
+    const authStatus = 'not-authenticated' // not-authenticated
   return (
     <BrowserRouter>
        <Routes>
