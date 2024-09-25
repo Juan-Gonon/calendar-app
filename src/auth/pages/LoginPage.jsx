@@ -18,15 +18,7 @@ const registerFormFields = {
 export const LoginPage = () => {
     const { loginEmail, loginPassword, onInputChange: onLoginInputChange } = useForm(loginFormFields)
     const {  registerName, registerEmail, registerPassword, registerPassword2, onInputChange: onRegisterInputChange } = useForm(registerFormFields)
-    const { startLogin, errorMessage } = useAuthStore()
-
-    useEffect(() => {
-
-        if( errorMessage !== undefined ){
-            Swal.fire('Error en la autenticación', errorMessage, 'error')
-        }
-    }, [errorMessage])
-    
+    const { startLogin, errorMessage, startRegister } = useAuthStore()
 
     const loginSubmit = ( event ) => {
         event.preventDefault()
@@ -43,14 +35,26 @@ export const LoginPage = () => {
 
     const registerSubmit = (event) => {
         event.preventDefault()
-        console.log({
-            registerName,
-            registerEmail,
-            registerPassword,
-            registerPassword2
-        });
+
+        if ( registerPassword !== registerPassword2){
+            Swal.fire('Error en registro', errorMessage?.payload, 'error')
+            return
+        }
+        startRegister({
+            name: registerName,
+            email: registerEmail,
+            password: registerPassword
+        })
 
     }
+
+    useEffect(() => {
+
+        if( errorMessage !== undefined ){
+            Swal.fire('Error en la autenticación', errorMessage?.payload , 'error')
+        }
+    }, [errorMessage])
+    
     return (
         <div className="container login-container">
             <div className="row">
