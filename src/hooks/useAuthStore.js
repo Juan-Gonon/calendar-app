@@ -57,10 +57,17 @@ export const useAuthStore = () => {
             localStorage.setItem('token-init-date', new Date().getTime())
             dispatch(onLogin({ name: data.name, uid: data.uid }))
                 
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             localStorage.clear()
             dispatch(onLogout())
         }
+    }
+
+    const startLogout = () => {
+        localStorage.clear()
+        dispatch(onLogout())
+
     }
 
     return {
@@ -72,6 +79,7 @@ export const useAuthStore = () => {
         // * Métodos
         startLogin,
         startRegister,
-        checkAuthToken
+        checkAuthToken,
+        startLogout
     };
 };
