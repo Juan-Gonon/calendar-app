@@ -1,24 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addHours } from "date-fns";
+// import { addHours } from "date-fns";
 
-const tempEvent = {
-    _id: new Date().getTime(),
-    title: "Cumpleaños de kamila",
-    notes: "Hay que comprar el pastel",
-    start: new Date(),
-    end: addHours(new Date(), 2),
-    bgColor: "#fafafa",
-    user: {
-        _id: "123",
-        name: "Juan",
-    },
-};
+// const tempEvent = {
+//     _id: new Date().getTime(),
+//     title: "Cumpleaños de kamila",
+//     notes: "Hay que comprar el pastel",
+//     start: new Date(),
+//     end: addHours(new Date(), 2),
+//     bgColor: "#fafafa",
+//     user: {
+//         _id: "123",
+//         name: "Juan",
+//     },
+// };
 
 export const calendarSlice = createSlice({
     name: "calendarSlice",
     initialState: {
-        events: [tempEvent],
+        events: [],
         activeEvent: null,
+        isLoadingEvents: true
     },
     reducers: {
         onSetActiveEvent: (state, { payload }) => {
@@ -42,9 +43,20 @@ export const calendarSlice = createSlice({
                 state.activeEvent = null
             }
           
+        },
+        onLoadEvents: ( state, { payload = [] }) => {
+            state.isLoadingEvents = false
+            // state.events = payload
+            payload.forEach( event => {
+                const exists = state.events.some( dbEvent => dbEvent.id === event.id)
+
+                if ( !exists ) {
+                    state.events.push( event )
+                }
+            })
         }
     },
 });
 
 // Los creadores de acciones se generan para cada función reductora de casos
-export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent } = calendarSlice.actions;
+export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent, onLoadEvents } = calendarSlice.actions;
