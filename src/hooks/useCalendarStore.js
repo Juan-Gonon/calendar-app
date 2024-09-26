@@ -39,7 +39,7 @@ export function useCalendarStore() {
             );
             
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             Swal.fire('Error al guardar', error.response.data.msg, 'error')
         }
 
@@ -47,9 +47,19 @@ export function useCalendarStore() {
         
     };
 
-    const startDeletingEvent = () => {
+    const startDeletingEvent = async () => {
         // backend
-        dispatch(onDeleteEvent())
+        try {
+            if( !activeEvent ){
+                throw new Error('No hay evento no seleccionado')
+            }
+
+            await calendarApi.delete(`/events/${activeEvent.id}`)
+            
+            dispatch(onDeleteEvent())
+        } catch (error) {
+            Swal.fire('Error al eliminar evento', error.response.data.msg, 'error')
+        }
     }
 
     const startLoadingEvents = async () => {
@@ -59,7 +69,7 @@ export function useCalendarStore() {
             dispatch(onLoadEvents(events))
             // console.log(events)
         } catch (error) {
-            console.log(error)
+            Swal.fire('Error al cargar evento', error.response.data.msg, 'error')
         }
     }
 
