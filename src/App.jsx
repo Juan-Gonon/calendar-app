@@ -1,10 +1,15 @@
-function App() {
+import { Provider } from "react-redux";
+import { AppRouter } from "./router";
+import { store } from "./store";
 
-  return (
-    <>
-    <h1>Calendar</h1>
-    </>
-  )
+function App() {
+    return (
+        <>
+            <Provider store={store}>
+                <AppRouter />
+            </Provider>
+        </>
+    );
 }
 
-export default App
+export default App;
